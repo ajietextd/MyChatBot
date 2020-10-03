@@ -30,7 +30,5 @@ The code referenced in this book is available on the book’s [website](http://p
 
 # 目录
 
-### [1.第一个Lita Bot](chapters/1Your First Lita Bot#mid)
-
-[test](#ww)
+### [1.第一个Lita Bot](chapters/1YourFirstLitaBot#mid)
 
