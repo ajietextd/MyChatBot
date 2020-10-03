@@ -98,4 +98,4 @@ OK
 
 > 在安装Lita之前执行`sudo apt-get install ruby-dev`，不然会报错
 >
-> ![image-20201003201133462](../img/image-20201003201133462.png)
+> <img src="../img/image-20201003201133462.png" alt="image-20201003201133462" width="600" />
