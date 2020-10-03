@@ -30,9 +30,4 @@ The code referenced in this book is available on the book’s [website](http://p
 
 # 目录
 
-<<<<<<< HEAD
 ### [1.第一个Lita Bot](chapters/1YourFirstLitaBot.md#1.1)
-=======
-### [1.第一个Lita Bot](chapters/1YourFirstLitaBot#mid)
->>>>>>> parent of d6a9cf1... Update README.md
-
