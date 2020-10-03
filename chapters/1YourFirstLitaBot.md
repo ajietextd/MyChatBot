@@ -64,7 +64,7 @@ sudo apt-get update && \
 	# a local redis datastore to provide persistence for Lita
 		sudo apt-get install -y redis-server && \
 	# some of the most common external libraries needed by popular Ruby Gems
-sudo apt-get install -y patch zlib1g-dev liblzma-dev libssl-dev
+sudo apt-get install -y patch zlib1g-dev liblzma-dev libssl-dev 
 ```
 
 现在已经有了构建一些常见的 Ruby gems 所需的编译器和外部依赖项，比如 Nokogiri。还安装了 Redis，这是 Lita 的主要依赖项。
@@ -91,3 +91,11 @@ OK
 > + 使用get命令获取键上的值(如果有的话)。
 > + del删除给定键的值。
 > + 更多信息参考[Redis官网](https://redis.io/documentation)
+
+**安装 Lita Gem**
+
+环境已经搭建好，接下来就是安装Lita。
+
+> 在安装Lita之前执行`sudo apt-get install ruby-dev`，不然会报错
+>
+> ![image-20201003201133462](../img/image-20201003201133462.png)
