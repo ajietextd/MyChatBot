@@ -12,13 +12,13 @@ Windows用户可以使用VMware虚拟机创建linux系统环境，Windows 10用�
 
 **安装Ruby**
 
-```shell
+```bash
 sudo apt-get install ruby
 ```
 
 **查看已安装的Ruby、gem和Bundler版本**
 
-```shell
+```bash
 $ ruby --version
 ruby 2.7.0p0 (2019-12-25 revision 647ee6f091) [x86_64-linux-gnu]
 $ gem --version
