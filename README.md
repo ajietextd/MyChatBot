@@ -4,4 +4,4 @@
 
 所用书籍为**Build Chatbot Interactions**
 
-<img src="img/image-20201003104348061.png" style="zoom:10%;" />
+<img src="img/image-20201003104348061.png" width="600" />
