@@ -14,6 +14,7 @@ Windows用户可以使用VMware虚拟机创建linux系统环境，Windows 10用�
 
 ```bash
 sudo apt-get install ruby
+sudo gem install bundler
 ```
 
 **查看已安装的Ruby、gem和Bundler版本**
@@ -24,26 +25,8 @@ ruby 2.7.0p0 (2019-12-25 revision 647ee6f091) [x86_64-linux-gnu]
 $ gem --version
 3.1.2
 $ bundle --version
-
-Command 'bundle' not found, but can be installed with:
-
-sudo snap install ruby          # version 2.7.1, or
-sudo apt  install ruby-bundler  # version 2.1.4-1
-
-See 'snap info ruby' for additional versions.
-
-```
-
-出现查询不到`bundle`命令的错误，根据提示使用`sudo apt  install ruby-bundler`来安装Bundler
-
-```bash
-$ bundle --version
 Bundler version 2.1.4
 ```
-
-
-
-> 注：原文是使用`gem install bundler`来安装，这里没有测试
 
 我们需要gem和Bundler来安装Lita和它的Ruby依赖。
 
@@ -99,3 +82,54 @@ OK
 > 在安装Lita之前执行`sudo apt-get install ruby-dev`，不然会报错
 >
 > <img src="../img/image-20201003201133462.png" alt="image-20201003201133462" width="600" />
+
+```bash
+$ sudo gem install lita
+$ lita --version
+4.8.0
+```
+
+**生成一个新的Lita Bot**
+
+```bash
+$ lita new mybot
+      create  mybot
+      create  mybot/Gemfile
+      create  mybot/lita_config.rb
+```
+
+使用lita命令，可以在名为mybot的本地文件夹中创建一个新的bot。最初的Lita bot只有两个文件:`Gemfile`和`lita config.rb`。从这里开始，你可以构建出一个正常运行的聊天机器人所需要的一切。
+
+<img src="../img/image-20201003202209823.png" alt="image-20201003202209823" width="400" />
+
+进入新创建的`mybot`文件夹，安装Lita需要的基本依赖。
+
+```bash
+$ cd mybot
+# installall Litagem dependenciesfrom./mybot/Gemfile~/mybotbundle
+$ bundle
+```
+
+> + Bundler在中央rubygems.org库中搜索Gemfile中命名的每个gems。
+> + Bundler解决了Gemfile中指定的各种gem 版本需求，并尝试在RubyGems 上找到一组相匹配的 gem 版本。
+> + Bundler 会下载或安装所有你需要的 gems。
+> + 某些低级的 gems，例如 puma，必须在后台进行一些编译，以便在前面讨论过的共享库中使用。
+> + Bundler 提供 `bundle info` 命令，允许你进一步检查新安装的gem。在某种程度上，你可能还想查找 `bundle how` 和 `bundle open`。
+
+**测试本地的Bot**
+
+Lita已经安装，但还没有启动。要启动它，从Lita的根目录中使用`lita`命令
+
+```bash
+/mybot$ lita
+Type "exit" or "quit" to end the session.
+Lita > lita help
+Lita: help - Lists help information for terms and command the robot will respond to.
+Lita: help COMMAND - Lists help information for terms or commands that begin with COMMAND.
+Lita: info - Replies with the current version of Lita.
+Lita: users find SEARCH_TERM - Find a Lita user by ID, name, or mention name.
+Lita > lita info
+Lita 4.8.0 - https://www.lita.io/
+Redis 5.0.7 - Memory used: 839.22K
+Lita > exit
+```
