@@ -47,3 +47,47 @@ Bundler version 2.1.4
 
 我们需要gem和Bundler来安装Lita和它的Ruby依赖。
 
+接下来安装非Ruby依赖项，这些依赖项为Lita使用的一些Ruby库(gems)提供了底层功能。
+
+**安装共享库和Redis**
+
+Ruby非常适合聊天机器人项目，因为它是一种功能强大的动态语言。这种灵活性的缺点是Ruby的速度不及其他难理解的语言。 这意味着将某些重复性任务（如crunching HTML或压缩文件）以Ruby作为编排层委派给非Ruby代码时会更好。 此代码通常以共享库的形式提供。 共享库通常以高速，静态类型的编译语言（如C）编写，并提供给其他任何本地程序（例如Lita）使用。 在本部分中，您将直接将依赖项安装到您的开发计算机上。Ruby在编译需要它们的相关gem时会使用这些库。接下来，我们运行命令行脚本来安装Lita所需的外部依赖项。
+
+> 问：怎么知道何时需要共享库？
+>
+> 答：Ruby gems 在 gem 安装时使用 `extconf.rb` 管理其外部依赖项。如果你未能安装所需的 gem 并且看到消息“ extconf.rb failed” ，那么 你应该去`StackOverflow` 以及搜索可能丢失的包。例如，输入“ nokogiri osx extconf”来定位 nokogiri 缺少的包。还可以阅读 extconf.rb 文件，看看是否有什么东西跳出来。
+
+```bash
+sudo apt-get update && \
+	# the compilers you'll need to bake in external library support
+		sudo apt-get install -y build-essential && \
+	# a local redis datastore to provide persistence for Lita
+		sudo apt-get install -y redis-server && \
+	# some of the most common external libraries needed by popular Ruby Gems
+sudo apt-get install -y patch zlib1g-dev liblzma-dev libssl-dev
+```
+
+现在已经有了构建一些常见的 Ruby gems 所需的编译器和外部依赖项，比如 Nokogiri。还安装了 Redis，这是 Lita 的主要依赖项。
+
+**使用Redis作为Lita的“大脑”**
+
+Redis是一个非常受欢迎的开源非关系型数据库，它提供了快速的键-值对存储功能。Lita需要Redis作为聊天交互中存储信息的一种方式。
+
+测试Redis是否正常安装
+
+```bash
+$ redis-cli
+127.0.0.1:6379> set lita "my chatbot"
+OK
+127.0.0.1:6379> get lita
+"my chatbot"
+127.0.0.1:6379> del lita
+(integer) 1
+127.0.0.1:6379> get lita
+```
+
+> + 默认情况下，Redis在端口6379的本地主机(127.0.0.1)上可用。
+> + 使用set命令编写一个key和一个value，以便稍后检索。在上面的例子中，"my chatbot"是键 “lita”的值。
+> + 使用get命令获取键上的值(如果有的话)。
+> + del删除给定键的值。
+> + 更多信息参考[Redis官网](https://redis.io/documentation)
