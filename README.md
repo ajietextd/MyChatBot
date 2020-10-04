@@ -30,4 +30,6 @@ The code referenced in this book is available on the book’s [website](http://p
 
 # 目录
 
-### [1.第一个Lita Bot](chapters/1YourFirstLitaBot.md#1.1)
+### [1.第一个Lita Bot](chapters/1YourFirstLitaBot.md)
+### [2.第一个Lita技能](chapters/2YourFirstLitaSkill.md)
+

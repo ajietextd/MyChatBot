@@ -1,4 +1,4 @@
-<h1 id="1.1">第一个Lite Bot</h1>
+# 第一个Lite Bot
 
 **运行环境**
 
@@ -10,24 +10,61 @@ Windows用户可以使用VMware虚拟机创建linux系统环境，Windows 10用�
 
 本文测试的是[VMware](https://www.vmware.com/cn/products/workstation-pro/workstation-pro-evaluation.html)版本是VMware Workstation Pro 15.1.0，[Ubuntu](https://cn.ubuntu.com/download) 版本是 Ubuntu 20.04 LTS 版本。
 
+> 注：Ubuntu请安装英文版，否则在后续使用Lita时会出现语言包丢失的情况
+
 [安装教程](https://www.linuxidc.com/Linux/2020-03/162547.htm)
 
 **安装Ruby**
 
+使用rvm来管理ruby版本
+
+```bash
+curl -L get.rvm.io | bash -s stable
+cd ~/.rvm/archives
+gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+curl -L get.rvm.io | bash -s stable
+source ~/.bashrc 
+source ~/.bash_profile
+source ~/.profile
+rvm -v
+rvm list known
+rvm install 2.5
+```
+
+以下是ruby2.7+gem3.1.2+bundler1.16.2的方式，后续未测试，**不推荐**
+
+------
+
+
+
 ```bash
 sudo apt-get install ruby
-sudo gem install bundler
 ```
+
+bundler安装最新版本在后面的测试lita环节会出错，所以bundler安装1.16.2版本
+
+```bash
+sudo gem install bundler -v=1.16.2
+```
+
+由于gem中自带2.x版本的bundler，默认使用高版本，所以需要删除默认设置
+
+```bash
+cd /lib/ruby/gems/2.7.0/specifications/default
+sudo rm bundler-2.1.2.gemspec 
+```
+
+------
 
 **查看已安装的Ruby、gem和Bundler版本**
 
 ```bash
-$ ruby --version
-ruby 2.7.0p0 (2019-12-25 revision 647ee6f091) [x86_64-linux-gnu]
-$ gem --version
-3.1.2
-$ bundle --version
-Bundler version 2.1.4
+$ ruby -v
+ruby 2.5.7p206 (2019-10-01 revision 67816) [x86_64-linux]
+$ gem -v
+2.7.10
+$ bundle -v
+Bundler version 1.16.6
 ```
 
 我们需要gem和Bundler来安装Lita和它的Ruby依赖。
@@ -50,6 +87,10 @@ sudo apt-get update && \
 		sudo apt-get install -y redis-server && \
 	# some of the most common external libraries needed by popular Ruby Gems
 sudo apt-get install -y patch zlib1g-dev liblzma-dev libssl-dev 
+```
+
+```
+sudo apt-get update && sudo apt-get install -y build-essential && sudo apt-get install -y redis-server && sudo apt-get install -y patch zlib1g-dev liblzma-dev libssl-dev 
 ```
 
 现在已经有了构建一些常见的 Ruby gems 所需的编译器和外部依赖项，比如 Nokogiri。还安装了 Redis，这是 Lita 的主要依赖项。
@@ -86,9 +127,9 @@ OK
 > <img src="../img/image-20201003201133462.png" alt="image-20201003201133462" width="600" />
 
 ```bash
-$ sudo gem install lita
+$ sudo gem install lita -v=4.7.1
 $ lita --version
-4.8.0
+4.7.1
 ```
 
 **生成一个新的Lita Bot**
