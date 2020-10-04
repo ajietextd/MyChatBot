@@ -21,7 +21,7 @@ Windows用户可以使用VMware虚拟机创建linux系统环境，Windows 10用�
 ```bash
 curl -L get.rvm.io | bash -s stable
 cd ~/.rvm/archives
-gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+gpg2 --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
 curl -L get.rvm.io | bash -s stable
 source ~/.bashrc 
 source ~/.bash_profile
@@ -29,6 +29,33 @@ source ~/.profile
 rvm -v
 rvm list known
 rvm install 2.5
+```
+
+> Failed to connect to raw.githubusercontent.com port 443 **解决方法**
+
+`sudo vi /etc/hosts` 添加如下字段
+
+```
+# GitHub Start
+52.74.223.119 github.com
+192.30.253.119 gist.github.com
+54.169.195.247 api.github.com
+185.199.111.153 assets-cdn.github.com
+151.101.76.133 raw.githubusercontent.com
+151.101.108.133 user-images.githubusercontent.com
+151.101.76.133 gist.githubusercontent.com
+151.101.76.133 cloud.githubusercontent.com
+151.101.76.133 camo.githubusercontent.com
+151.101.76.133 avatars0.githubusercontent.com
+151.101.76.133 avatars1.githubusercontent.com
+151.101.76.133 avatars2.githubusercontent.com
+151.101.76.133 avatars3.githubusercontent.com
+151.101.76.133 avatars4.githubusercontent.com
+151.101.76.133 avatars5.githubusercontent.com
+151.101.76.133 avatars6.githubusercontent.com
+151.101.76.133 avatars7.githubusercontent.com
+151.101.76.133 avatars8.githubusercontent.com
+# GitHub End
 ```
 
 以下是ruby2.7+gem3.1.2+bundler1.16.2的方式，后续未测试，**不推荐**
