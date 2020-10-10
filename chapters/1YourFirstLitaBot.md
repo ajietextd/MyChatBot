@@ -26,10 +26,10 @@ curl -L get.rvm.io | bash -s stable
 #source ~/.bashrc 
 #source ~/.bash_profile
 #source ~/.profile
-source ~/.rvm/scripts/rvm #开启rvm
-rvm -v
+source ~/.rvm/scripts/rvm #开启rvm。注：每次打开新终端时执行此代码来开启rvm
+rvm -v #查看rvm版本
 rvm requirements #安装rvm的依赖
-rvm list known
+rvm list known #查看可下载的版本
 rvm install 2.5
 ```
 
@@ -60,31 +60,6 @@ rvm install 2.5
 # GitHub End
 ```
 
-以下是ruby2.7+gem3.1.2+bundler1.16.2的方式，后续未测试，**不推荐**
-
-------
-
-
-
-```bash
-sudo apt-get install ruby
-```
-
-bundler安装最新版本在后面的测试lita环节会出错，所以bundler安装1.16.2版本
-
-```bash
-sudo gem install bundler -v=1.16.2
-```
-
-由于gem中自带2.x版本的bundler，默认使用高版本，所以需要删除默认设置
-
-```bash
-cd /lib/ruby/gems/2.7.0/specifications/default
-sudo rm bundler-2.1.2.gemspec 
-```
-
-------
-
 **查看已安装的Ruby、gem和Bundler版本**
 
 ```bash
@@ -109,6 +84,7 @@ Ruby非常适合聊天机器人项目，因为它是一种功能强大的动态�
 > 答：Ruby gems 在 gem 安装时使用 `extconf.rb` 管理其外部依赖项。如果你未能安装所需的 gem 并且看到消息“ extconf.rb failed” ，那么 你应该去`StackOverflow` 以及搜索可能丢失的包。例如，输入“ nokogiri osx extconf”来定位 nokogiri 缺少的包。还可以阅读 extconf.rb 文件，看看是否有什么东西跳出来。
 
 ```bash
+#带注释版
 sudo apt-get update && \
 	# the compilers you'll need to bake in external library support
 		sudo apt-get install -y build-essential && \
@@ -118,7 +94,8 @@ sudo apt-get update && \
 sudo apt-get install -y patch zlib1g-dev liblzma-dev libssl-dev 
 ```
 
-```
+```bash
+#不带注释版，方便直接复制执行
 sudo apt-get update && sudo apt-get install -y build-essential && sudo apt-get install -y redis-server && sudo apt-get install -y patch zlib1g-dev liblzma-dev libssl-dev 
 ```
 
@@ -151,12 +128,8 @@ OK
 
 环境已经搭建好，接下来就是安装Lita。
 
-> 在安装Lita之前执行`sudo apt-get install ruby-dev`，不然会报错
->
-> <img src="../img/image-20201003201133462.png" alt="image-20201003201133462" width="600" />
-
 ```bash
-$ sudo gem install lita -v=4.7.1
+$ gem install lita -v=4.7.1
 $ lita --version
 4.7.1
 ```
@@ -201,7 +174,8 @@ Lita: help COMMAND - Lists help information for terms or commands that begin wit
 Lita: info - Replies with the current version of Lita.
 Lita: users find SEARCH_TERM - Find a Lita user by ID, name, or mention name.
 Lita > lita info
-Lita 4.8.0 - https://www.lita.io/
+Lita 4.7.1 - https://www.lita.io/
 Redis 5.0.7 - Memory used: 839.22K
 Lita > exit
 ```
+

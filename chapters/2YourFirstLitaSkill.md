@@ -52,7 +52,7 @@ lita handler doubler
 
 <img src="../img/image-20201004091806948.png" alt="image-20201004092112029" width="600" />
 
-新生成的`Lita-doubler`目录下包含以下文件
+新生成的`lita-doubler`目录下包含以下文件
 
 <img src="../img/image-20201004092314463.png" alt="image-20201004093305855" width="600" />
 
@@ -66,3 +66,51 @@ lita handler doubler
 用适当的描述、摘要和主页链接替换“ TODO”部分。
 
 ![image-20201004094909164](../img/image-20201004094909164.png)
+
+进入`lita-doubler`目录下，运行`bundle`来安装gem的运行环境，这些环境列在gemspec文件的底部。
+
+**告诉Lita何时响应route**
+
+编写`lita-doubler/lib/lita/handlers/doubler.rb`，插入以下代码
+
+```ruby
+      route(
+        /^double\s+(\d+)$/i,
+        :respond_with_double,
+        command: true,
+        help: { 'double N' => 'prints N + N' }
+      )
+```
+
+**使用单元测试验证第一个route**
+
+当你的处理程序无法识别预期的**触发词**时，编写Bot技能会令人沮丧。你可以通过编写route测试来避免这种情况。下面是一些使用Lita的`expected.toroute`语法进行RSpec测试。你可以测试正向“预期响应时响应”的情况，以及为反向的“当输入与特定路由不完全匹配时不响应”的情况。负面测试有助于构建一种心理模型，了解某一特定代码段的预期行为。对于像doubler这样的小技能来说，这并不是什么大问题。然而，当你创造更复杂的技能时，负面测试就派上用场了
+
+编写`lita-doubler/spec/lita/handlers/doubler_spec.rb`，插入以下代码
+
+```ruby
+  describe 'routing' do
+    # allow extra whitespace
+    it { is_expected.to route('Lita double 2') }
+    it { is_expected.to route('Lita double    22') }
+    # allow mixed casing
+    it { is_expected.to route('Lita doUble 4') }
+
+    # ignore numbers that don't look like integers
+    it { is_expected.to_not route('Lita double two') }
+    it { is_expected.to_not route('Lita double 1e4') }
+  end
+```
+
+**完善技能并写一些单元测试**
+
+
+
+**把你的技能作为一个Ruby Gem发布给别人**
+
+```bash
+git remote add origin git@github.com:ajietextd/lita-doubler.git
+git add .
+git commit -m "Add everything for first push to GitHub"
+```
+
